@@ -1,0 +1,17 @@
+{
+  "name": "reiat-mobile",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "Reiat",
+  "license": "ISC",
+  "description": "Reiat — Gen-Z Fashion E-Commerce & Digital Sewing Pattern Platform",
+  "devDependencies": {
+    "vite": "^6.4.1"
+  }
+}
