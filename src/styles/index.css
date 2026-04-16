@@ -656,6 +656,21 @@ ul, ol {
   transform: translateX(-50%) translateY(0);
 }
 
+/* Sticky top (handle + header) */
+.modal-sheet__sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-white);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+  transition: box-shadow 200ms ease;
+}
+
+.modal-sheet__sticky-top--shadow {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
 .modal-sheet__handle {
   width: 36px;
   height: 4px;
@@ -1430,3 +1445,425 @@ ul, ol {
 .text-primary { color: var(--color-primary); }
 
 .w-full { width: 100%; }
+
+/* ============================================
+   Pattern Detail Page
+   ============================================ */
+.pattern-detail__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.pattern-detail__rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pattern-detail__rating svg {
+  width: 16px;
+  height: 16px;
+  color: #F59E0B;
+}
+
+.pattern-detail__rating .text-secondary {
+  font-weight: 400;
+}
+
+/* Quick Stats */
+.pattern-detail__stats {
+  display: flex;
+  gap: var(--space-md);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-base);
+  margin-bottom: var(--space-lg);
+}
+
+.pattern-detail__stat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.pattern-detail__stat svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  stroke-width: 1.8;
+}
+
+.pattern-detail__stat div {
+  display: flex;
+  flex-direction: column;
+}
+
+.pattern-detail__stat-value {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.pattern-detail__stat-label {
+  font-size: var(--font-xs);
+  color: var(--color-text-tertiary);
+  line-height: 1.2;
+}
+
+/* Sections */
+.pattern-detail__section {
+  margin-bottom: var(--space-lg);
+}
+
+.pattern-detail__section-title {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.pattern-detail__desc {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* Includes List */
+.pattern-detail__includes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.pattern-detail__include-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-sm);
+  color: var(--color-text);
+}
+
+.pattern-detail__include-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-success);
+  flex-shrink: 0;
+  stroke-width: 2;
+}
+
+/* Dual Sticky CTA */
+.sticky-cta--dual {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.btn-outline--icon {
+  width: 52px;
+  min-height: 52px;
+  padding: 0;
+  flex-shrink: 0;
+  border-radius: var(--radius-lg);
+}
+
+.btn-outline--icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 1.8;
+}
+
+/* ============================================
+   Auto Scale Bottom Sheet Components
+   ============================================ */
+
+/* Body Part Chip Selector */
+.body-part-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.body-part-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-base);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.body-part-chip:active {
+  transform: scale(0.96);
+}
+
+.body-part-chip--active {
+  border-color: var(--color-primary);
+  background: rgba(26, 35, 126, 0.06);
+  box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.08);
+}
+
+.body-part-chip__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  flex-shrink: 0;
+  transition: var(--transition-base);
+}
+
+.body-part-chip--active .body-part-chip__icon {
+  background: var(--color-primary);
+  color: white;
+}
+
+.body-part-chip__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.8;
+  color: var(--color-primary);
+  transition: var(--transition-base);
+}
+
+.body-part-chip--active .body-part-chip__icon svg {
+  color: white;
+}
+
+.body-part-chip__label {
+  font-size: var(--font-base);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.body-part-chip--active .body-part-chip__label {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Measurement Area */
+.measurement-area {
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: var(--space-base);
+  margin-bottom: var(--space-lg);
+  border: 1.5px solid var(--color-border-light);
+}
+
+.measurement-area--enter {
+  animation: measureSlideIn 350ms var(--ease-spring) both;
+}
+
+@keyframes measureSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.measurement-area__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-base);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.measurement-area__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: white;
+  flex-shrink: 0;
+}
+
+.measurement-area__icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.measurement-area__title {
+  font-size: var(--font-base);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.measurement-area__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Measurement Input with Unit */
+.measurement-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.measurement-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.measurement-input-wrap .measurement-input {
+  padding-right: 48px;
+}
+
+.measurement-input-unit {
+  position: absolute;
+  right: var(--space-base);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+/* Measurements Summary */
+.measurements-summary {
+  margin-bottom: var(--space-base);
+  animation: measureSlideIn 300ms var(--ease-out) both;
+}
+
+.measurements-summary__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-success);
+  margin-bottom: var(--space-sm);
+}
+
+.measurements-summary__title svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+}
+
+.measurements-summary__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.measurements-summary__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  animation: measureSlideIn 250ms var(--ease-out) both;
+}
+
+.measurements-summary__item-label {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}
+
+.measurements-summary__item-value {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* Sizing result icon inline */
+.sizing-result__value svg {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  display: inline;
+  margin-right: 4px;
+}
+
+/* Save Measurement Button */
+.btn-save-measurement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-base);
+  margin-top: var(--space-base);
+  background: var(--color-primary);
+  color: white;
+  font-family: var(--font-family);
+  font-size: var(--font-base);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-save-measurement:active:not(:disabled) {
+  transform: scale(0.97);
+  background: var(--color-primary-light);
+}
+
+.btn-save-measurement svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.btn-save-measurement--saved {
+  background: var(--color-success);
+  cursor: default;
+  opacity: 0.85;
+}
+
+/* Disabled Input */
+.form-input--disabled {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+  border-color: var(--color-border-light);
+}
+
+/* Saved Chip Indicator */
+.body-part-chip--saved {
+  border-color: var(--color-success);
+  background: rgba(76, 175, 80, 0.06);
+}
+
+.body-part-chip--saved .body-part-chip__icon {
+  background: var(--color-success);
+}
+
+.body-part-chip--saved .body-part-chip__icon svg {
+  color: white;
+}
+
+.body-part-chip--saved .body-part-chip__label {
+  color: var(--color-success);
+  font-weight: 600;
+}
+

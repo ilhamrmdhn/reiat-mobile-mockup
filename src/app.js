@@ -8,6 +8,7 @@ import { renderHome, initHome } from './views/home.js';
 import { renderProductDetail, initProductDetail } from './views/product-detail.js';
 import { renderCheckout, initCheckout } from './views/checkout.js';
 import { renderWorkspace, initWorkspace } from './views/workspace.js';
+import { renderPatternDetail, initPatternDetail } from './views/pattern-detail.js';
 
 const app = document.getElementById('app');
 
@@ -50,6 +51,10 @@ function render() {
     case 'workspace':
       app.innerHTML = renderWorkspace(navigate);
       initWorkspace(navigate);
+      break;
+    case 'pattern-detail':
+      app.innerHTML = renderPatternDetail(navigate);
+      initPatternDetail(navigate);
       break;
     default:
       app.innerHTML = renderHome(navigate);

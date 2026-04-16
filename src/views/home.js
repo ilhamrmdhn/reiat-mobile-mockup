@@ -106,7 +106,12 @@ export function initHome(navigateFn) {
       const card = e.target.closest('.product-card');
       if (!card) return;
       const productId = card.dataset.productId;
-      navigateFn('product-detail', { productId });
+      const product = products.find(p => p.id === parseInt(productId));
+      if (product && product.type === 'pattern') {
+        navigateFn('pattern-detail', { productId });
+      } else {
+        navigateFn('product-detail', { productId });
+      }
     });
   }
 }
