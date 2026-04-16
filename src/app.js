@@ -40,8 +40,8 @@ function render() {
       initHome(navigate);
       break;
     case 'product-detail':
-      app.innerHTML = renderProductDetail(navigate);
-      initProductDetail(navigate);
+      app.innerHTML = renderProductDetail(navigate, routeParams);
+      initProductDetail(navigate, routeParams);
       break;
     case 'checkout':
       app.innerHTML = renderCheckout(navigate);

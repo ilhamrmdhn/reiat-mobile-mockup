@@ -5,8 +5,6 @@ import { icons } from '../icons.js';
  * Dynamic match level computation based on user inputs
  */
 
-let isToggleActive = true;
-
 function computeMatch(height, weight, bust) {
   if (!height || !weight || !bust) return null;
 
@@ -81,13 +79,6 @@ export function renderSmartSizingModal() {
           </div>
         </div>
 
-        <div class="toggle-row">
-          <span class="toggle-row__label">Auto-scale pattern proportions</span>
-          <div class="toggle-switch toggle-switch--active" id="auto-scale-toggle">
-            <div class="toggle-switch__thumb"></div>
-          </div>
-        </div>
-
         <button class="btn-accent w-full mt-lg" id="sizing-apply">
           ${icons.sparkles}
           Apply & Save
@@ -117,7 +108,6 @@ export function initSmartSizingModal() {
   const closeBtn = document.getElementById('sizing-close');
   const overlay = document.getElementById('sizing-overlay');
   const applyBtn = document.getElementById('sizing-apply');
-  const toggle = document.getElementById('auto-scale-toggle');
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (overlay) overlay.addEventListener('click', closeModal);
@@ -125,13 +115,6 @@ export function initSmartSizingModal() {
   if (applyBtn) {
     applyBtn.addEventListener('click', () => {
       closeModal();
-    });
-  }
-
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      isToggleActive = !isToggleActive;
-      toggle.classList.toggle('toggle-switch--active', isToggleActive);
     });
   }
 
