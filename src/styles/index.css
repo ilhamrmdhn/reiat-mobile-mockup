@@ -1585,3 +1585,295 @@ ol {
 .w-full {
   width: 100%;
 }
+
+/* ============================================
+   Loading Spinner Animation
+   ============================================ */
+@keyframes iconSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.icon-spin {
+  animation: iconSpin 800ms linear infinite;
+}
+
+.btn--loading {
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.btn--loading svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   Form Input Validation Error
+   ============================================ */
+.form-input--error {
+  border-color: #E53935 !important;
+  background: rgba(229, 57, 53, 0.04);
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.1);
+}
+
+.form-input--error:focus {
+  border-color: #E53935 !important;
+  box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.15);
+}
+
+.form-error {
+  display: none;
+  font-size: var(--font-xs);
+  color: #E53935;
+  margin-top: 4px;
+  line-height: 1.3;
+  animation: errorIn 250ms var(--ease-out) both;
+}
+
+@keyframes errorIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   Info Trigger Button (next to label)
+   ============================================ */
+.form-label--with-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.info-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-primary);
+  opacity: 0.6;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.info-trigger:hover,
+.info-trigger:active {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.info-trigger svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+}
+
+/* ============================================
+   Measurement Guide Popup
+   ============================================ */
+.guide-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms var(--ease-out);
+}
+
+.guide-overlay--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.guide-popup {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: 100%;
+  max-width: 430px;
+  max-height: 80dvh;
+  overflow-y: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  z-index: 301;
+  transition: transform 400ms var(--ease-spring);
+}
+
+.guide-popup--active {
+  transform: translateX(-50%) translateY(0);
+}
+
+.guide-popup__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-lg) var(--space-sm);
+  position: sticky;
+  top: 0;
+  background: var(--color-white);
+  z-index: 5;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.guide-popup__title {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.guide-popup__body {
+  padding: var(--space-base) var(--space-lg) var(--space-2xl);
+}
+
+/* Guide Illustration */
+.guide-illustration {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-lg) 0 var(--space-xl);
+}
+
+.guide-illustration__figure {
+  width: 140px;
+  height: 180px;
+  position: relative;
+}
+
+.guide-figure-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guide-figure-head {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-border);
+  margin-bottom: 8px;
+}
+
+.guide-figure-torso {
+  width: 70px;
+  height: 90px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-figure-tape {
+  position: absolute;
+  top: 28px;
+  left: -16px;
+  right: -16px;
+  height: 8px;
+  background: var(--color-accent);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 8px rgba(255, 112, 67, 0.4);
+  animation: tapePulse 2s ease-in-out infinite;
+}
+
+@keyframes tapePulse {
+  0%, 100% { opacity: 1; transform: scaleX(1); }
+  50% { opacity: 0.7; transform: scaleX(1.05); }
+}
+
+.guide-figure-arms {
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+}
+
+.guide-figure-arm {
+  position: absolute;
+  width: 20px;
+  height: 60px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.guide-figure-arm--left {
+  left: 8px;
+  transform: rotate(12deg);
+}
+
+.guide-figure-arm--right {
+  right: 8px;
+  transform: rotate(-12deg);
+}
+
+/* Guide Steps */
+.guide-steps {
+  counter-reset: guide-step;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.guide-step {
+  counter-increment: guide-step;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  font-size: var(--font-sm);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.guide-step::before {
+  content: counter(guide-step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Guide Tip */
+.guide-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--color-accent-light);
+  border-radius: var(--radius-md);
+  font-size: var(--font-sm);
+  color: var(--color-accent-hover);
+  line-height: 1.5;
+}
+
+.guide-tip svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke-width: 2;
+  margin-top: 1px;
+}
