@@ -1,14 +1,17 @@
 import { icons } from '../icons.js';
+import { getCartCount } from '../store/cart-store.js';
 
 /**
  * Bottom Navigation Bar Component
  * 4 icons: Home (Beranda), Workspace, Cart (Keranjang), Profile (Profil)
  */
 export function renderBottomNav(activeRoute = 'home') {
+  const cartCount = getCartCount();
+
   const navItems = [
     { id: 'home',      icon: icons.home,         label: 'Beranda' },
     { id: 'workspace', icon: icons.scissors,      label: 'Workspace' },
-    { id: 'checkout',  icon: icons.shoppingCart,   label: 'Keranjang' },
+    { id: 'cart',      icon: icons.shoppingCart,   label: 'Keranjang', badge: cartCount },
     { id: 'profile',   icon: icons.user,          label: 'Profil' },
   ];
 
@@ -22,7 +25,10 @@ export function renderBottomNav(activeRoute = 'home') {
           aria-label="${item.label}"
           ${item.id === 'profile' ? 'onclick="return false"' : ''}
         >
-          ${item.icon}
+          <div class="bottom-nav__icon-wrap">
+            ${item.icon}
+            ${item.badge ? `<span class="bottom-nav__badge">${item.badge}</span>` : ''}
+          </div>
           <span class="bottom-nav__label">${item.label}</span>
         </button>
       `).join('')}

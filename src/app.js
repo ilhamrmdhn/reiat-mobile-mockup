@@ -6,7 +6,10 @@
 import './styles/index.css';
 import { renderHome, initHome } from './views/home.js';
 import { renderProductDetail, initProductDetail } from './views/product-detail.js';
+import { renderCart, initCart } from './views/cart.js';
+import { renderShipping, initShipping } from './views/shipping.js';
 import { renderCheckout, initCheckout } from './views/checkout.js';
+import { renderOrderSuccess, initOrderSuccess } from './views/order-success.js';
 import { renderWorkspace, initWorkspace } from './views/workspace.js';
 
 const app = document.getElementById('app');
@@ -43,9 +46,21 @@ function render() {
       app.innerHTML = renderProductDetail(navigate, routeParams);
       initProductDetail(navigate, routeParams);
       break;
+    case 'cart':
+      app.innerHTML = renderCart(navigate);
+      initCart(navigate);
+      break;
+    case 'shipping':
+      app.innerHTML = renderShipping(navigate);
+      initShipping(navigate);
+      break;
     case 'checkout':
       app.innerHTML = renderCheckout(navigate);
       initCheckout(navigate);
+      break;
+    case 'order-success':
+      app.innerHTML = renderOrderSuccess(navigate);
+      initOrderSuccess(navigate);
       break;
     case 'workspace':
       app.innerHTML = renderWorkspace(navigate);

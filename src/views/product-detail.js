@@ -1,5 +1,6 @@
 import { icons } from '../icons.js';
 import { renderSmartSizingModal, initSmartSizingModal, openModal } from '../components/smart-sizing-modal.js';
+import { addToCart } from '../store/cart-store.js';
 
 /**
  * Screen 2: Product Detail Page
@@ -274,27 +275,72 @@ export function initProductDetail(navigateFn, routeParams = {}) {
     initSmartSizingModal();
   }
 
-  // Handle Buy Pattern & Buy Clothing button
+  // Helper to get product data for cart
+  function getCartProduct() {
+    return {
+      id: routeParams.productId || '1',
+      name: productData.name,
+      price: productData.price,
+      image: productData.images?.[0] || '/images/cardigan.png',
+      type: productData.type,
+    };
+  }
+
+  // Handle Buy Pattern & Buy Clothing button → add to cart then go to cart
   const buyPatternBtn = document.getElementById('buy-pattern-btn');
   if (buyPatternBtn) {
-    buyPatternBtn.addEventListener('click', () => navigateFn('checkout'));
+    buyPatternBtn.addEventListener('click', () => {
+      addToCart(getCartProduct());
+      navigateFn('cart');
+    });
   }
 
   const buyClothingBtn = document.getElementById('buy-clothing-btn');
   if (buyClothingBtn) {
-    buyClothingBtn.addEventListener('click', () => navigateFn('checkout'));
+    buyClothingBtn.addEventListener('click', () => {
+      addToCart(getCartProduct());
+      navigateFn('cart');
+    });
   }
 
-  // Add to Cart button
+  // Add to Cart button → add with feedback toast
   const addToCartBtn = document.getElementById('add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', () => {
+      addToCart(getCartProduct());
+
+      // Visual feedback
       addToCartBtn.classList.add('pdp-cta-icon-btn--added');
-      addToCartBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>`;
+      addToCartBtn.innerHTML = icons.checkCircle;
+
+      // Show toast
+      showCartToast(productData.name);
+
       setTimeout(() => {
         addToCartBtn.classList.remove('pdp-cta-icon-btn--added');
         addToCartBtn.innerHTML = icons.shoppingCart;
       }, 1500);
     });
   }
+}
+
+function showCartToast(productName) {
+  // Remove existing toast
+  const existing = document.getElementById('cart-toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'cart-toast';
+  toast.className = 'cart-toast cart-toast--enter';
+  toast.innerHTML = `
+    ${icons.checkCircle}
+    <span><strong>${productName}</strong> ditambahkan ke keranjang</span>
+  `;
+  document.body.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('cart-toast--visible'), 10);
+  setTimeout(() => {
+    toast.classList.remove('cart-toast--visible');
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
 }
