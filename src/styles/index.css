@@ -584,6 +584,10 @@ ol {
   z-index: 50;
 }
 
+.sticky-cta--with-nav {
+  bottom: var(--bottom-nav-height);
+}
+
 .sticky-cta .btn-accent {
   width: 100%;
 }
@@ -1147,7 +1151,7 @@ ol {
 .workspace {
   background: var(--color-bg);
   min-height: 100dvh;
-  padding-bottom: calc(var(--bottom-nav-height) + var(--space-lg));
+  padding-bottom: 88px;
 }
 
 .workspace__header {
@@ -2178,16 +2182,16 @@ ol {
 
 .cart-page__header {
   display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-base);
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-base) var(--space-md);
   background: var(--color-white);
 }
 
 .cart-page__title {
-  font-size: var(--font-md);
-  font-weight: 600;
-  flex: 1;
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 .cart-page__count {
@@ -2722,11 +2726,15 @@ ol {
 }
 
 @keyframes successCircle {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes successTick {
-  to { stroke-dashoffset: 0; }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .success-title {
@@ -2748,8 +2756,15 @@ ol {
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Success Card */
@@ -2865,8 +2880,13 @@ ol {
 }
 
 @keyframes badgePop {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 
@@ -2874,8 +2894,13 @@ ol {
    Loading Spinner Animation
    ============================================ */
 @keyframes iconSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .icon-spin {
@@ -2916,8 +2941,15 @@ ol {
 }
 
 @keyframes errorIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ============================================
@@ -3074,8 +3106,17 @@ ol {
 }
 
 @keyframes tapePulse {
-  0%, 100% { opacity: 1; transform: scaleX(1); }
-  50% { opacity: 0.7; transform: scaleX(1.05); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scaleX(1.05);
+  }
 }
 
 .guide-figure-arms {

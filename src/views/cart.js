@@ -1,7 +1,6 @@
 import { icons } from '../icons.js';
 import { getCart, getSubtotal, updateQty, removeFromCart, formatRupiah, isCartAllDigital } from '../store/cart-store.js';
-
-/**
+import { renderBottomNav, initBottomNav } from '../components/bottom-nav.js';/**
  * Cart Page — Shopping cart with qty controls, remove, and subtotal
  */
 
@@ -13,9 +12,6 @@ export function renderCart(navigateFn) {
     <div class="cart-page" id="cart-view">
       <!-- Header -->
       <div class="cart-page__header">
-        <button class="pdp__back-btn" id="cart-back" aria-label="Back">
-          ${icons.arrowLeft}
-        </button>
         <h1 class="cart-page__title">Keranjang</h1>
         <span class="cart-page__count">${items.length} item</span>
       </div>
@@ -79,20 +75,21 @@ export function renderCart(navigateFn) {
 
     ${!isEmpty ? `
     <!-- Sticky CTA -->
-    <div class="sticky-cta" id="cart-sticky-cta">
+    <div class="sticky-cta sticky-cta--with-nav" id="cart-sticky-cta">
       <button class="btn-accent w-full" id="cart-checkout-btn">
         Lanjut ke Pengiriman
         ${icons.chevronRight}
       </button>
     </div>
     ` : ''}
+    
+    ${renderBottomNav('cart')}
   `;
 }
 
 export function initCart(navigateFn) {
-  const backBtn = document.getElementById('cart-back');
-  if (backBtn) backBtn.addEventListener('click', () => navigateFn('home'));
-
+  initBottomNav(navigateFn);
+  
   const shopBtn = document.getElementById('cart-shop-btn');
   if (shopBtn) shopBtn.addEventListener('click', () => navigateFn('home'));
 

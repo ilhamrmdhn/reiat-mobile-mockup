@@ -1,6 +1,4 @@
 import { icons } from '../icons.js';
-import { renderBottomNav, initBottomNav } from '../components/bottom-nav.js';
-
 /**
  * Screen 5: Design Workspace (Instructional Hub)
  * PDF download button, custom styled video player, accordion step-by-step instructions
@@ -42,12 +40,14 @@ export function renderWorkspace(navigateFn, routeParams = {}) {
     <div class="workspace view" id="workspace-view">
       <!-- Header -->
       <div class="workspace__header workspace__header--detail">
-        <button class="pdp__back-btn" id="ws-back" aria-label="Back">
-          ${icons.arrowLeft}
-        </button>
-        <div>
-          <h1 class="workspace__title">Design Workspace</h1>
-          <p class="workspace__subtitle">Blouse Pattern — Tutorial & Instruksi</p>
+        <div class="workspace__header-top">
+          <button class="pdp__back-btn" id="ws-back" aria-label="Back">
+            ${icons.arrowLeft}
+          </button>
+          <div>
+            <h1 class="workspace__title">Design Workspace</h1>
+            <p class="workspace__subtitle">Blouse Pattern — Tutorial & Instruksi</p>
+          </div>
         </div>
       </div>
 
@@ -105,14 +105,10 @@ export function renderWorkspace(navigateFn, routeParams = {}) {
         </div>
       </div>
     </div>
-
-    ${renderBottomNav('workspace')}
   `;
 }
 
 export function initWorkspace(navigateFn, routeParams = {}) {
-  initBottomNav(navigateFn);
-
   // Back button
   const backBtn = document.getElementById('ws-back');
   if (backBtn) backBtn.addEventListener('click', () => navigateFn('workspace-list'));
