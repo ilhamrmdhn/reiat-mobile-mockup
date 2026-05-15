@@ -9,8 +9,8 @@
   --color-primary: #1A237E;
   --color-primary-light: #283593;
   --color-primary-dark: #0D1553;
-  --color-accent: #FF7043;
-  --color-accent-hover: #FF5722;
+  --color-accent: #A82700;
+  --color-accent-hover: rgb(204, 58, 14);
   --color-accent-light: rgba(255, 112, 67, 0.12);
   --color-bg: #F5F5F5;
   --color-white: #FFFFFF;
@@ -3160,4 +3160,4 @@ ol {
   flex-shrink: 0;
   stroke-width: 2;
   margin-top: 1px;
-}
+}
