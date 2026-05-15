@@ -10,6 +10,7 @@ import { renderCart, initCart } from './views/cart.js';
 import { renderShipping, initShipping } from './views/shipping.js';
 import { renderCheckout, initCheckout } from './views/checkout.js';
 import { renderOrderSuccess, initOrderSuccess } from './views/order-success.js';
+import { renderWorkspaceList, initWorkspaceList } from './views/workspace-list.js';
 import { renderWorkspace, initWorkspace } from './views/workspace.js';
 
 const app = document.getElementById('app');
@@ -62,9 +63,13 @@ function render() {
       app.innerHTML = renderOrderSuccess(navigate);
       initOrderSuccess(navigate);
       break;
+    case 'workspace-list':
+      app.innerHTML = renderWorkspaceList(navigate);
+      initWorkspaceList(navigate);
+      break;
     case 'workspace':
-      app.innerHTML = renderWorkspace(navigate);
-      initWorkspace(navigate);
+      app.innerHTML = renderWorkspace(navigate, routeParams);
+      initWorkspace(navigate, routeParams);
       break;
     default:
       app.innerHTML = renderHome(navigate);

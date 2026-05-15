@@ -69,4 +69,13 @@ export const icons = {
   mail: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
 
   shoppingBag: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+
+  star: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>`,
+
+  starEmpty: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>`,
+
+  image: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`,
+
+  quote: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 2.5c-1.4.5-2.6 1.2-3.6 2.2-1 .9-1.8 2-2.3 3.3-.5 1.2-.8 2.6-.8 4 0 1.5.3 2.9.9 4.2.6 1.3 1.4 2.4 2.4 3.3.4.3.7.3 1-.1l.8-1.1c.3-.4.2-.7-.1-1-.7-.6-1.2-1.3-1.6-2.1-.4-.8-.6-1.7-.6-2.7h2.8c.5 0 1-.2 1.3-.5.4-.4.5-.8.5-1.3V4.3c0-.5-.2-1-.5-1.3-.4-.4-.8-.5-1.3-.5H7.5zm10 0c-1.4.5-2.6 1.2-3.6 2.2-1 .9-1.8 2-2.3 3.3-.5 1.2-.8 2.6-.8 4 0 1.5.3 2.9.9 4.2.6 1.3 1.4 2.4 2.4 3.3.4.3.7.3 1-.1l.8-1.1c.3-.4.2-.7-.1-1-.7-.6-1.2-1.3-1.6-2.1-.4-.8-.6-1.7-.6-2.7h2.8c.5 0 1-.2 1.3-.5.4-.4.5-.8.5-1.3V4.3c0-.5-.2-1-.5-1.3-.4-.4-.8-.5-1.3-.5h-2.8z"/></svg>`,
 };
+

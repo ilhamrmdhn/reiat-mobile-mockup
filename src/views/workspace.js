@@ -37,13 +37,18 @@ const steps = [
   },
 ];
 
-export function renderWorkspace(navigateFn) {
+export function renderWorkspace(navigateFn, routeParams = {}) {
   return `
     <div class="workspace view" id="workspace-view">
       <!-- Header -->
-      <div class="workspace__header">
-        <h1 class="workspace__title">Design Workspace</h1>
-        <p class="workspace__subtitle">Blouse Pattern — Tutorial & Instruksi</p>
+      <div class="workspace__header workspace__header--detail">
+        <button class="pdp__back-btn" id="ws-back" aria-label="Back">
+          ${icons.arrowLeft}
+        </button>
+        <div>
+          <h1 class="workspace__title">Design Workspace</h1>
+          <p class="workspace__subtitle">Blouse Pattern — Tutorial & Instruksi</p>
+        </div>
       </div>
 
       <!-- Download PDF Button -->
@@ -105,8 +110,12 @@ export function renderWorkspace(navigateFn) {
   `;
 }
 
-export function initWorkspace(navigateFn) {
+export function initWorkspace(navigateFn, routeParams = {}) {
   initBottomNav(navigateFn);
+
+  // Back button
+  const backBtn = document.getElementById('ws-back');
+  if (backBtn) backBtn.addEventListener('click', () => navigateFn('workspace-list'));
 
   // Accordion toggle
   const accordion = document.getElementById('accordion');
