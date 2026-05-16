@@ -11,8 +11,12 @@ let selectedPayment = 'ewallet';
 
 export function addToCart(product) {
   const existing = cartItems.find(item => item.id === product.id);
+  const type = product.type || 'clothing';
+
   if (existing) {
-    existing.qty += 1;
+    if (type !== 'pattern') {
+      existing.qty += 1;
+    }
   } else {
     cartItems.push({
       id: product.id,
@@ -20,7 +24,7 @@ export function addToCart(product) {
       price: product.price,
       priceNum: parsePriceToNumber(product.price),
       image: product.image || product.images?.[0] || '/images/cardigan.png',
-      type: product.type || 'clothing',
+      type: type,
       qty: 1,
     });
   }

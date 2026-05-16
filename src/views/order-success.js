@@ -42,7 +42,7 @@ export function renderOrderSuccess(navigateFn) {
       </div>
 
       <h1 class="success-title">Pesanan Berhasil!</h1>
-      <p class="success-subtitle">Terima kasih atas pesananmu. ${allDigital ? 'File akan segera dikirim ke email.' : 'Pesanan sedang diproses.'}</p>
+      <p class="success-subtitle">Terima kasih atas pesananmu. ${allDigital ? 'Pola digitalmu sudah bisa diakses.' : 'Pesanan sedang diproses.'}</p>
 
       <!-- Order Details Card -->
       <div class="success-card">
@@ -75,8 +75,8 @@ export function renderOrderSuccess(navigateFn) {
 
       ${allDigital ? `
       <div class="success-digital-note">
-        ${icons.mail}
-        <span>Cek email kamu untuk mengunduh file pola digital.</span>
+        ${icons.scissors}
+        <span>Pola digital sudah tersedia dan dapat diakses melalui menu Design Workspace.</span>
       </div>
       ` : `
       <div class="success-digital-note success-digital-note--shipping">

@@ -66,10 +66,10 @@ export function renderCheckout(navigateFn) {
       ${allDigital ? `
       <div class="checkout__section">
         <div class="digital-notice">
-          ${icons.mail}
+          ${icons.scissors}
           <div>
             <p class="digital-notice__title">Produk Digital</p>
-            <p class="digital-notice__text">File akan dikirim ke email kamu setelah pembayaran berhasil.</p>
+            <p class="digital-notice__text">Pola dapat langsung diakses pada menu Design Workspace setelah pembayaran berhasil.</p>
           </div>
         </div>
       </div>

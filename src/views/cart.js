@@ -7,6 +7,7 @@ import { renderBottomNav, initBottomNav } from '../components/bottom-nav.js';/**
 export function renderCart(navigateFn) {
   const items = getCart();
   const isEmpty = items.length === 0;
+  const allDigital = isCartAllDigital();
 
   return `
     <div class="cart-page" id="cart-view">
@@ -36,7 +37,7 @@ export function renderCart(navigateFn) {
             <div class="cart-item__body">
               <div class="cart-item__top">
                 <div>
-                  <span class="cart-item__badge cart-item__badge--${item.type}">${item.type === 'pattern' ? 'Digital' : 'Clothing'}</span>
+                  <span class="cart-item__badge cart-item__badge--${item.type}">${item.type === 'pattern' ? 'Digital Pattern' : 'Clothing'}</span>
                   <p class="cart-item__name">${item.name}</p>
                 </div>
                 <button class="cart-item__remove" data-remove="${item.id}" aria-label="Remove">
@@ -45,6 +46,11 @@ export function renderCart(navigateFn) {
               </div>
               <div class="cart-item__bottom">
                 <p class="cart-item__price">${formatRupiah(item.priceNum)}</p>
+                ${item.type === 'pattern' ? `
+                <div class="qty-control qty-control--fixed" style="border:none; padding:0; background:transparent;">
+                  <span class="qty-control__value" style="font-weight:600; color:var(--color-text-secondary); width:auto;">1x</span>
+                </div>
+                ` : `
                 <div class="qty-control">
                   <button class="qty-control__btn" data-qty-action="minus" data-qty-id="${item.id}" aria-label="Kurangi">
                     ${icons.minus}
@@ -54,6 +60,7 @@ export function renderCart(navigateFn) {
                     ${icons.plus}
                   </button>
                 </div>
+                `}
               </div>
             </div>
           </div>
@@ -66,9 +73,15 @@ export function renderCart(navigateFn) {
           <span>Subtotal</span>
           <span class="cart-summary__value" id="cart-subtotal">${formatRupiah(getSubtotal())}</span>
         </div>
+        ${allDigital ? `
+        <div class="cart-summary__row cart-summary__row--note">
+          <span>${icons.mail} Produk digital tanpa ongkos kirim</span>
+        </div>
+        ` : `
         <div class="cart-summary__row cart-summary__row--note">
           <span>${icons.truck} Ongkir dihitung di langkah berikutnya</span>
         </div>
+        `}
       </div>
       `}
     </div>
@@ -77,7 +90,7 @@ export function renderCart(navigateFn) {
     <!-- Sticky CTA -->
     <div class="sticky-cta sticky-cta--with-nav" id="cart-sticky-cta">
       <button class="btn-accent w-full" id="cart-checkout-btn">
-        Lanjut ke Pengiriman
+        ${allDigital ? 'Lanjut ke Pembayaran' : 'Lanjut ke Pengiriman'}
         ${icons.chevronRight}
       </button>
     </div>
