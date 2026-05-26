@@ -7,20 +7,25 @@ import { renderBottomNav, initBottomNav } from '../components/bottom-nav.js';
  */
 
 const products = [
-  { id: 1, name: 'Pink Oversized Cardigan', price: 'Rp 189.000', image: '/images/cardigan.png', type: 'clothing' },
-  { id: 2, name: 'Blouse Pattern — Digital', price: 'Rp 45.000', image: '/images/pattern-blouse.png', type: 'pattern' },
-  { id: 3, name: 'Cropped Denim Jacket', price: 'Rp 275.000', image: '/images/denim-jacket.png', type: 'clothing' },
-  { id: 4, name: 'A-Line Skirt Pattern', price: 'Rp 35.000', image: '/images/pattern-skirt.png', type: 'pattern' },
-  { id: 5, name: 'Oversized Graphic Tee', price: 'Rp 129.000', image: '/images/streetwear-tee.png', type: 'clothing' },
-  { id: 6, name: 'Cable Knit Sweater', price: 'Rp 245.000', image: '/images/knit-sweater.png', type: 'clothing' },
+  { id: 1, name: 'Pink Oversized Cardigan', price: 'Rp 189.000', priceNum: 189000, image: '/images/cardigan.png', type: 'clothing' },
+  { id: 2, name: 'Blouse Pattern — Digital', price: 'Rp 45.000', priceNum: 45000, image: '/images/pattern-blouse.png', type: 'pattern' },
+  { id: 3, name: 'Cropped Denim Jacket', price: 'Rp 275.000', priceNum: 275000, image: '/images/denim-jacket.png', type: 'clothing' },
+  { id: 4, name: 'A-Line Skirt Pattern', price: 'Rp 35.000', priceNum: 35000, image: '/images/pattern-skirt.png', type: 'pattern' },
+  { id: 5, name: 'Oversized Graphic Tee', price: 'Rp 129.000', priceNum: 129000, image: '/images/streetwear-tee.png', type: 'clothing' },
+  { id: 6, name: 'Cable Knit Sweater', price: 'Rp 245.000', priceNum: 245000, image: '/images/knit-sweater.png', type: 'clothing' },
+];
+
+const sortOptions = [
+  { id: 'default', label: 'Default' },
+  { id: 'price-asc', label: 'Harga Termurah' },
+  { id: 'price-desc', label: 'Harga Termahal' },
+  { id: 'name-asc', label: 'Nama A-Z' },
 ];
 
 const categories = [
   { label: 'Semua', active: true },
   { label: 'Pakaian', active: false },
   { label: 'Pola Digital', active: false },
-  { label: 'Trending', active: false },
-  { label: 'Sale', active: false },
 ];
 
 // Store reviews data
@@ -99,15 +104,6 @@ export function renderHome(navigateFn) {
       <div class="home-header">
         <div class="home-header__top">
           <h1 class="home-header__logo">Rei<span>at</span></h1>
-          <div class="home-header__actions">
-            <button class="home-header__icon-btn" aria-label="Wishlist">
-              ${icons.heart}
-            </button>
-            <button class="home-header__icon-btn" aria-label="Notifications">
-              ${icons.bell}
-              <span class="home-header__badge"></span>
-            </button>
-          </div>
         </div>
 
         <!-- Search Bar -->
@@ -116,19 +112,34 @@ export function renderHome(navigateFn) {
             ${icons.search}
             <input type="text" placeholder="Cari pakaian & pola jahit..." id="search-input" />
           </div>
-          <button class="filter-btn" id="filter-btn" aria-label="Filter">
+          <button class="filter-btn" id="filter-btn" aria-label="Filter & Sort">
             ${icons.filter}
           </button>
         </div>
       </div>
 
-      <!-- Category Pills -->
-      <div class="category-pills" id="category-pills">
-        ${categories.map((cat, i) => `
-          <button class="category-pill ${cat.active ? 'category-pill--active' : ''}" data-index="${i}">
-            ${cat.label}
-          </button>
-        `).join('')}
+      <!-- Filter & Sort Panel -->
+      <div class="filter-panel filter-panel--hidden" id="filter-panel">
+        <div class="filter-panel__section">
+          <span class="filter-panel__label">Kategori</span>
+          <div class="filter-panel__pills" id="category-pills">
+            ${categories.map((cat, i) => `
+              <button class="category-pill ${cat.active ? 'category-pill--active' : ''}" data-index="${i}">
+                ${cat.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+        <div class="filter-panel__section">
+          <span class="filter-panel__label">Urutkan</span>
+          <div class="filter-panel__pills" id="sort-pills">
+            ${sortOptions.map(opt => `
+              <button class="category-pill ${opt.id === 'default' ? 'category-pill--active' : ''}" data-sort="${opt.id}">
+                ${opt.label}
+              </button>
+            `).join('')}
+          </div>
+        </div>
       </div>
 
       <!-- Product Grid -->
@@ -205,6 +216,7 @@ export function renderHome(navigateFn) {
     </div>
 
     ${renderBottomNav('home')}
+    </div>
   `;
 }
 
@@ -222,19 +234,60 @@ function getAvatarColor(letter) {
 export function initHome(navigateFn) {
   initBottomNav(navigateFn);
 
-  // Category pill toggle
+  // Category pill toggle + filter products
   const pillContainer = document.getElementById('category-pills');
+  const grid = document.getElementById('product-grid');
+
+  function renderProducts(list) {
+    if (!grid) return;
+    grid.innerHTML = list.map(p => `
+      <div class="product-card" data-product-id="${p.id}" id="product-${p.id}">
+        <img class="product-card__image" src="${p.image}" alt="${p.name}" loading="lazy" />
+        <div class="product-card__info">
+          <span class="product-card__badge product-card__badge--${p.type === 'pattern' ? 'pattern' : 'clothing'}">
+            ${p.type === 'pattern' ? 'Digital Pattern' : 'Clothing'}
+          </span>
+          <p class="product-card__name">${p.name}</p>
+          <p class="product-card__price">${p.price}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
   if (pillContainer) {
     pillContainer.addEventListener('click', (e) => {
       const pill = e.target.closest('.category-pill');
       if (!pill) return;
       pillContainer.querySelectorAll('.category-pill').forEach(p => p.classList.remove('category-pill--active'));
       pill.classList.add('category-pill--active');
+
+      const label = pill.textContent.trim();
+      let filtered = [...products];
+
+      if (label === 'Pakaian') {
+        filtered = products.filter(p => p.type === 'clothing');
+      } else if (label === 'Pola Digital') {
+        filtered = products.filter(p => p.type === 'pattern');
+      } else if (label === 'Sale') {
+        filtered = products.filter(p => p.priceNum <= 50000);
+      }
+      // 'Semua' dan 'Trending' menampilkan semua produk
+
+      renderProducts(filtered);
+    });
+  }
+
+  // Filter button → toggle filter panel
+  const filterBtn = document.getElementById('filter-btn');
+  const filterPanel = document.getElementById('filter-panel');
+  if (filterBtn && filterPanel) {
+    filterBtn.addEventListener('click', () => {
+      filterPanel.classList.toggle('filter-panel--hidden');
+      filterBtn.classList.toggle('filter-btn--active');
     });
   }
 
   // Product card click → navigate to PDP
-  const grid = document.getElementById('product-grid');
   if (grid) {
     grid.addEventListener('click', (e) => {
       const card = e.target.closest('.product-card');
@@ -243,5 +296,34 @@ export function initHome(navigateFn) {
       navigateFn('product-detail', { productId });
     });
   }
+
+  // Sort pills
+  const sortPills = document.getElementById('sort-pills');
+  if (sortPills) {
+    sortPills.addEventListener('click', (e) => {
+      const pill = e.target.closest('.category-pill');
+      if (!pill) return;
+
+      sortPills.querySelectorAll('.category-pill').forEach(p => p.classList.remove('category-pill--active'));
+      pill.classList.add('category-pill--active');
+
+      const sortId = pill.dataset.sort;
+      let sorted = [...products];
+
+      if (sortId === 'price-asc') {
+        sorted.sort((a, b) => a.priceNum - b.priceNum);
+      } else if (sortId === 'price-desc') {
+        sorted.sort((a, b) => b.priceNum - a.priceNum);
+      } else if (sortId === 'name-asc') {
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+      }
+
+      renderProducts(sorted);
+    });
+  }
+
+  // See all reviews button
+  const seeAllBtn = document.getElementById('reviews-see-all');
+  if (seeAllBtn) seeAllBtn.addEventListener('click', () => navigateFn('all-reviews'));
 }
 

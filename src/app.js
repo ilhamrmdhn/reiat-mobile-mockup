@@ -12,6 +12,7 @@ import { renderCheckout, initCheckout } from './views/checkout.js';
 import { renderOrderSuccess, initOrderSuccess } from './views/order-success.js';
 import { renderWorkspaceList, initWorkspaceList } from './views/workspace-list.js';
 import { renderWorkspace, initWorkspace } from './views/workspace.js';
+import { renderAllReviews, initAllReviews } from './views/all-reviews.js';
 
 const app = document.getElementById('app');
 
@@ -70,6 +71,10 @@ function render() {
     case 'workspace':
       app.innerHTML = renderWorkspace(navigate, routeParams);
       initWorkspace(navigate, routeParams);
+      break;
+    case 'all-reviews':
+      app.innerHTML = renderAllReviews(navigate);
+      initAllReviews(navigate);
       break;
     default:
       app.innerHTML = renderHome(navigate);

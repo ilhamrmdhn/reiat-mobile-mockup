@@ -175,7 +175,7 @@ export function initCheckout(navigateFn) {
 
       setTimeout(() => {
         navigateFn('order-success');
-      }, 1500);
+      }, 30000);
     });
   }
 }
