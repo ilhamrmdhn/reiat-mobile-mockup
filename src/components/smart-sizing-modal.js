@@ -104,7 +104,7 @@ export function renderSmartSizingModal() {
           </div>
         </div>
 
-        <div class="sizing-result sizing-result--empty" id="sizing-result">
+        <div class="sizing-result sizing-result--empty" id="sizing-result" style="display: none;">
           <div class="sizing-result__label">Match Level</div>
           <div class="sizing-result__value" id="sizing-result-value">
             Masukkan data untuk melihat hasil
@@ -113,7 +113,7 @@ export function renderSmartSizingModal() {
 
         <button class="btn-accent w-full mt-lg" id="sizing-apply">
           ${icons.sparkles}
-          <span id="sizing-apply-text">Apply & Save</span>
+          <span id="sizing-apply-text">Cek Ukuran</span>
         </button>
       </div>
     </div>
@@ -169,14 +169,14 @@ export function initSmartSizingModal() {
       // Show loading state
       applyBtn.disabled = true;
       applyBtn.classList.add('btn--loading');
-      if (applyText) applyText.textContent = 'Menyimpan...';
+      if (applyText) applyText.textContent = 'Mengecek...';
       applyBtn.querySelector('svg')?.replaceWith(createSpinnerEl());
 
-      // Simulate save delay
+      // Simulate loading delay
       setTimeout(() => {
         applyBtn.disabled = false;
         applyBtn.classList.remove('btn--loading');
-        if (applyText) applyText.textContent = 'Apply & Save';
+        if (applyText) applyText.textContent = 'Cek Ukuran';
         // Restore sparkle icon
         const spinner = applyBtn.querySelector('.icon-spin');
         if (spinner) {
@@ -184,8 +184,10 @@ export function initSmartSizingModal() {
           temp.innerHTML = icons.sparkles;
           spinner.replaceWith(temp.firstElementChild);
         }
-        closeModal();
-      }, 1200);
+        
+        // Show result after loading
+        updateResult();
+      }, 1000);
     });
   }
 
@@ -232,6 +234,7 @@ export function initSmartSizingModal() {
 
     if (!allValid) {
       resultEl?.classList.add('sizing-result--empty');
+      if (resultEl) resultEl.style.display = 'none';
       if (resultValueEl) resultValueEl.textContent = 'Perbaiki data yang salah';
       return;
     }
@@ -244,18 +247,25 @@ export function initSmartSizingModal() {
 
     if (match) {
       resultEl?.classList.remove('sizing-result--empty');
+      if (resultEl) resultEl.style.display = 'block';
       if (resultValueEl) resultValueEl.innerHTML = `Match Level: <strong>${match.percent}%</strong> — ${match.fit}`;
     } else {
       resultEl?.classList.add('sizing-result--empty');
+      if (resultEl) resultEl.style.display = 'none';
       if (resultValueEl) resultValueEl.textContent = 'Masukkan data untuk melihat hasil';
     }
   }
 
   [heightInput, weightInput, bustInput].forEach(input => {
     if (input) {
-      input.addEventListener('input', updateResult);
       input.addEventListener('blur', () => {
         if (input.value) validateField(input);
+      });
+      // Clear result if user starts typing again
+      input.addEventListener('input', () => {
+        if (resultEl && resultEl.style.display === 'block') {
+           resultEl.style.display = 'none';
+        }
       });
     }
   });
